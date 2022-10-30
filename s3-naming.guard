@@ -1,0 +1,25 @@
+let s3_bucket = Resources.*[Type == 'AWS::S3::Bucket']
+
+rule s3_naming_validation when %s3_bucket !empty { 
+    # Named-rule block to be executed only if s3_bucket evaluates to 'PASS'
+  
+  %s3_bucket {
+
+    Properties {
+
+      BucketName is_string << BucketName should be a string.>>
+      
+      # Tags[*] {   # uncomment this block to enforce tagging.
+      # Key == /Environment/ !empty
+      # Value == /prod/ or 
+      # Value == /dev/
+      # } <<S3Bucket resource should have tag property.>>
+      #
+    }
+  }
+  
+  %s3_bucket.Properties {
+    BucketName == /lly-edb-(raw|refined|landing|conformed|exploratory|log|codeconfig|Archival|Athena|Webhosting)-(us-east-2|us-east-1|add_region)-(dev|prod)/
+    PublicAccessBlockConfiguration == {"BlockPublicAcls":true,"BlockPublicPolicy":true,"IgnorePublicAcls":true,"RestrictPublicBuckets":true}
+  }
+}

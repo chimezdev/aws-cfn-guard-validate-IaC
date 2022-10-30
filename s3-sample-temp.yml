@@ -1,0 +1,15 @@
+Parameters: 
+  BucketName: 
+    Type: String
+    Default: ' '
+    Description: 'Please enter the bucket name'
+Resources:
+  PublicBucket:    
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: 'lly-edb-raw-us-east-2-dev'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
