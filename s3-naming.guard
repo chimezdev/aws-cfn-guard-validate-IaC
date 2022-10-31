@@ -19,7 +19,7 @@ rule s3_naming_validation when %s3_bucket !empty {
   }
   
   %s3_bucket.Properties {
-    BucketName == /lly-edb-(raw|refined|landing|conformed|exploratory|log|codeconfig|Archival|Athena|Webhosting)-(us-east-2|us-east-1|add_region)-(dev|prod)/
+    BucketName == /lly-edb-(raw|refined|landing|conformed|exploratory|log|codeconfig|Archival|Athena Results|Webhosting)-(us-east-2|us-east-1|add_region)-(dev|qa|prod)/
     PublicAccessBlockConfiguration == {"BlockPublicAcls":true,"BlockPublicPolicy":true,"IgnorePublicAcls":true,"RestrictPublicBuckets":true}
   }
 }
